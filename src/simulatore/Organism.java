@@ -1,5 +1,9 @@
 package simulatore;
 
+/**
+ * @author walsl
+ *
+ */
 public abstract class Organism {
 	int organisimEnergy;
 	public Organism(){
@@ -10,7 +14,7 @@ public abstract class Organism {
 	 * By default, an organism gains one new energy point.
 	 */
 	public void update (){
-		
+		incrementEnergy();
 	}
 	
 
@@ -18,12 +22,14 @@ public abstract class Organism {
 	 * @return the current energy of this organism.
 	 */ 
 	public int getEnergy() {
+		return organisimEnergy;
 		
 	}
 	/**
 	 * increments this organism’s energy by 1.
 	 */
 	public void incrementEnergy() {
+		organisimEnergy +=1;
 		
 	}
 	/**
@@ -31,7 +37,9 @@ public abstract class Organism {
 	 * An organism’s energy cannot be decremented below 0.
 	 */
 	public void decmentEnergy() {
-		
+		if(organisimEnergy >1) {
+			organisimEnergy -=1;
+		}
 	}
 	
 	/**
