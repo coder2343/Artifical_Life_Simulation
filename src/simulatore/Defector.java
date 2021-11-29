@@ -15,7 +15,7 @@ public class Defector extends Organism{
 	@Override
 	public Organism reproduce() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Defector();
 	}
 
 	@Override

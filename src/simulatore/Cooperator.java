@@ -14,13 +14,13 @@ public class Cooperator extends Organism {
 	@Override
 	public Organism reproduce() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Cooperator();
 	}
 
 	@Override
 	public double getCooperationProbability() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	/**

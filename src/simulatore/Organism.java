@@ -5,7 +5,7 @@ package simulatore;
  *
  */
 public abstract class Organism {
-	int organisimEnergy;
+	private int organisimEnergy;
 	public Organism(){
 		organisimEnergy =0;
 	}
