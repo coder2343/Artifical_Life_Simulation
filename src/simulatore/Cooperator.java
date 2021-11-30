@@ -24,6 +24,8 @@ public class Cooperator extends Organism {
 	}
 
 	/**
+	 * When an organism cooperates, it loses one of its energy units and in exchange it gives eight other organisms an energy unit. 
+	 * (You will randomly select which other organisms to give energy to.)
 	 *@return true 100% of the tiems because this organism always cooperates with peers
 	 */
 	@Override
