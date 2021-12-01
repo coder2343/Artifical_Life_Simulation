@@ -4,7 +4,7 @@ import java.util.Map;
 
 /**
  * @author walsl
- *
+ *SYntax error.
  */
 public class Population {
 	private Map<String, Integer> populationMap;
@@ -18,6 +18,7 @@ public class Population {
 	 *  Throws an IllegalArgumentException if the mapping mentions organism types that do not exist in the program.
 	 */
 	public Population(Map<String, Integer> counts) {
+		populationMap = counts;
 		
 	}
 	
@@ -30,6 +31,8 @@ public class Population {
 	 * If the organism has at least 10 energy units, 
 	 *then it reproduces a
 	 *and that new organism replaces a random organism in the population.
+	 *    --- QUESTION FOR BARB 
+	 *    		DOES THAT mean any organism will be replaced or organism of some other type
 	 */
 	public void update() {
 		
@@ -41,6 +44,13 @@ public class Population {
 	 * the cooperation probabilities of all the organisms in the population.
 	 */
 	public double calcuateCooperationMean() {
+		int cooperatorNumber = populationMap.get("Cooperator");
+		int defectorNumber = populationMap.get("Defector");
+		int  partialCooperatorNumber  = populationMap.get("PartialCooperator");
+		
+		return ( (double) cooperatorNumber +
+
+
 		
 	}
 	
@@ -48,6 +58,9 @@ public class Population {
 	 * @return the counts of all the organisms in the population.
 	 */
 	public Map<String, Integer> getPopulationCounts(){
-		
+		int cooperatorNumber = populationMap.get("Cooperator");
+		int defectorNumber = populationMap.get("Defector");
+		int  partialCooperatorNumber  = populationMap.get("PartialCooperator");
+		return cooperatorNumber+ defectorNumber +partialCooperatorNumber;
 	}
 }
