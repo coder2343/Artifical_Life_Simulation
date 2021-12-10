@@ -10,7 +10,7 @@ public class Cooperator extends Organism {
 		return "Cooperator";
 	}
 
-	
+
 	@Override
 	public Organism reproduce() {
 		// TODO Auto-generated method stub

@@ -9,11 +9,9 @@ import java.util.Random;
  */
 public class PartialCooperator extends Organism {
 	Random cooperatorGenerator;
-	
-	
-	/**
-	 * 
-	 */
+
+
+
 	public PartialCooperator() {
 		cooperatorGenerator = new Random();
 	}
@@ -27,22 +25,16 @@ public class PartialCooperator extends Organism {
 		return "PartialCooperator";
 	}
 
-	/**
-	 *
-	 */
 	@Override
 	public Organism reproduce() {
 		// TODO Auto-generated method stub
-	
+
 		return new PartialCooperator() ;
 	}
 
-	/**
-	 *
-	 */
+
 	@Override
 	public double getCooperationProbability() {
-		// TODO Auto-generated method stub
 		return 0.5;
 	}
 
@@ -52,15 +44,14 @@ public class PartialCooperator extends Organism {
 	 */
 	@Override
 	public boolean cooperates() {
-		// TODO Auto-generated method stub
 		int coperateDeterminator = cooperatorGenerator.nextInt(101);
 		if(coperateDeterminator >50) {
-			
+
 			return true;
 		}
 		else {
-		return false;
-	}
+			return false;
+		}
 	}
 
 }

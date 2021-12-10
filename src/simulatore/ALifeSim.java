@@ -35,18 +35,18 @@ public class ALifeSim {
 
 		}
 		catch(NumberFormatException e){
-			
+
 		}
 		inputTable.put("Cooperators", cooperators);
 		inputTable.put("Defectors", defectors);
 		inputTable.put("partialCooperators", partialCooperators);
-		
+
 		Population testPopulation = new Population(inputTable);
 
 		// implemmenting population
 		for(int i= 0; i<iterations;i++) {
 			testPopulation.update();
-			
+
 		}
 		Map<String,Integer> expirmentOutput = testPopulation.getPopulationCounts();
 		System.out.println("After: " + iterations + " iterations" );
@@ -58,6 +58,6 @@ public class ALifeSim {
 		System.out.println("mean partial  cooperator cooperation proabability =" + " " + testPopulation.getMeanPartialCooperatorCooperation());
 		System.out.println("mean  cooperator cooperation proabability =" + " " + testPopulation.getMeanCooperatorCooperation());
 
-		
+
 	}
 }
