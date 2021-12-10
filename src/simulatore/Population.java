@@ -1,6 +1,5 @@
 package simulatore;
 
-import java.security.cert.CollectionCertStoreParameters;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,7 +8,7 @@ import java.util.Random;
 
 /**
  * @author walsl
- *SYntax error.
+ *
  */
 public class Population {
 	//private HashMap<String, Integer> populationMap;
@@ -27,8 +26,6 @@ public class Population {
 	 *  Organisms not mentioned in the mapping do not appear in the population. 
 	 *  Throws an IllegalArgumentException if the mapping mentions organism types that do not exist in the program.
 	 */
-
-
 	public Population(HashMap<String, Integer> counts) {
 		//populationMap = counts;
 		lifeForms = new ArrayList<>();
@@ -50,8 +47,6 @@ public class Population {
 
 
 		}
-		//System.out.println(numberCooperator);
-
 		for(int i =0; i<numberCooperator; i++  ) {
 			lifeForms.add(new Cooperator());
 		}
@@ -61,8 +56,6 @@ public class Population {
 		for(int i =0; i<numberPartialCooperator; i++  ) {
 			lifeForms.add(new PartialCooperator());
 		}
-
-
 	}
 
 	/**
@@ -85,7 +78,6 @@ public class Population {
 		}
 		Collections.shuffle(randomIndexList);
 		int replaceIndex= replace.nextInt(lifeForms.size());
-		int replaceType = replace.nextInt(2);
 
 		// iterate through whole population
 		for(int i = 0; i <lifeForms.size(); i++) {
@@ -113,24 +105,24 @@ public class Population {
 						lifeForms.get(CooperationIndex).incrementEnergy();
 						continue;
 					}
-						
-						lifeForms.get(CooperationIndex).incrementEnergy();
 
-					}
+					lifeForms.get(CooperationIndex).incrementEnergy();
+
 				}
+			}
 
 
-			
+
 			// check for organism reporduction is avalible 
 			// fix upddate for c
 			//TODO FIX AND ADD NEW ORGANSIM OF SAME TYPE ONLY
-			
+
 			if( (lifeForms.get(i).getEnergy())>=10) {
 				if(lifeForms.get(i).GetType().equals("Cooperator")) {
 					lifeForms.set(replaceIndex, new Cooperator());
 				}
 				else if(lifeForms.get(i).GetType().equals("Defector")){
-				
+
 					lifeForms.set(i, new Defector());
 
 				}
@@ -139,8 +131,8 @@ public class Population {
 				}
 			}
 		}
-		}
-	
+	}
+
 
 	/**
 	 * @return calculates the mean cooperation probability of all the organisms 
