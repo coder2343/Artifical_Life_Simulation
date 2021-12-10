@@ -127,33 +127,15 @@ public class Population {
 			
 			if( (lifeForms.get(i).getEnergy())>=10) {
 				if(lifeForms.get(i).GetType().equals("Cooperator")) {
-					if(replaceType ==1) {
-						lifeForms.set(replaceIndex, new PartialCooperator());
-					}
-					else {
-						lifeForms.set(replaceIndex, new Defector());
-
-					}
-
+					lifeForms.set(replaceIndex, new Cooperator());
 				}
 				else if(lifeForms.get(i).GetType().equals("Defector")){
-					if(replaceType ==1) {
-						lifeForms.set(replaceIndex, new PartialCooperator());
-					}
-					else {
-						lifeForms.set(replaceIndex, new Cooperator());
-
-					}
+				
+					lifeForms.set(i, new Defector());
 
 				}
 				else if(lifeForms.get(i).GetType().equals("PartialCooperator")){
-					if(replaceType ==1) {
-						lifeForms.set(i, new Cooperator());
-
-					}
-					else {
-						lifeForms.set(i, new Defector());
-					}
+					lifeForms.set(replaceIndex, new PartialCooperator());
 				}
 			}
 		}
