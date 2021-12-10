@@ -1,6 +1,8 @@
 package simulatore;
 
+import java.security.cert.CollectionCertStoreParameters;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -77,11 +79,53 @@ public class Population {
 	 */
 	public void update() {
 		Random replace = new Random();
-		int replaceIndex = replace.nextInt(lifeForms.size());
+		ArrayList<Integer> randomIndexList = new ArrayList<>();
+		for(int i =0; i<lifeForms.size(); i++) {
+			randomIndexList.add(i);
+		}
+		Collections.shuffle(randomIndexList);
+		int replaceIndex= replace.nextInt(lifeForms.size());
 		int replaceType = replace.nextInt(2);
+
+		// iterate through whole population
 		for(int i = 0; i <lifeForms.size(); i++) {
+
 			lifeForms.get(i).update();
-			if(lifeForms.get(i).cooperates()&& (lifeForms.get(i).getEnergy())>=10) {
+
+			// check cooperation and add / decrease endergy points 
+			// set correct donation number 
+			int donationNumber =8;
+			if(lifeForms.size() <8) {
+				donationNumber = lifeForms.size() -1;
+			}
+			if(lifeForms.get(i).cooperates()) {
+				lifeForms.get(i).decmentEnergy();
+
+				for(int b =0; b<donationNumber; b++) {
+					Integer CooperationIndex = randomIndexList.get(b);
+					// check if cooperator is donating to itself
+					if(lifeForms.get(i)== lifeForms.get(CooperationIndex)) {
+						CooperationIndex = randomIndexList.get(b +1);
+						// adjust b to skip next index and intead go for one more round
+						// set b 
+						b=b+2;
+						b++;
+						lifeForms.get(CooperationIndex).incrementEnergy();
+						continue;
+					}
+						
+						lifeForms.get(CooperationIndex).incrementEnergy();
+
+					}
+				}
+
+
+			
+			// check for organism reporduction is avalible 
+			// fix upddate for c
+			//TODO FIX AND ADD NEW ORGANSIM OF SAME TYPE ONLY
+			
+			if( (lifeForms.get(i).getEnergy())>=10) {
 				if(lifeForms.get(i).GetType().equals("Cooperator")) {
 					if(replaceType ==1) {
 						lifeForms.set(replaceIndex, new PartialCooperator());
@@ -113,7 +157,8 @@ public class Population {
 				}
 			}
 		}
-	}
+		}
+	
 
 	/**
 	 * @return calculates the mean cooperation probability of all the organisms 
@@ -130,7 +175,7 @@ public class Population {
 		cooperationProbability = sumProabilites/ lifeForms.size();
 		return cooperationProbability;		
 	}
-	
+
 	/**
 	 * @return calculates the mean cooperation probability of all the organisms 
 	 * in the population—the average of 
@@ -141,7 +186,7 @@ public class Population {
 		double sumProabilites = 0;
 		for (int i =0 ; i <lifeForms.size(); i++){
 			if(lifeForms.get(i).GetType().equals("Cooperator")) {
-			sumProabilites +=lifeForms.get(i).getCooperationProbability();
+				sumProabilites +=lifeForms.get(i).getCooperationProbability();
 			}
 
 		}
@@ -159,7 +204,7 @@ public class Population {
 		double sumProabilites = 0;
 		for (int i =0 ; i <lifeForms.size(); i++){
 			if(lifeForms.get(i).GetType().equals("PartialCooperator")) {
-			sumProabilites +=lifeForms.get(i).getCooperationProbability();
+				sumProabilites +=lifeForms.get(i).getCooperationProbability();
 			}
 
 		}
@@ -177,7 +222,7 @@ public class Population {
 		for (int i =0 ; i <lifeForms.size(); i++){
 			if(lifeForms.get(i).GetType().equals("Defector")) {
 
-			sumProabilites +=lifeForms.get(i).getCooperationProbability();
+				sumProabilites +=lifeForms.get(i).getCooperationProbability();
 			}
 		}
 		cooperationProbability = sumProabilites/ lifeForms.size();

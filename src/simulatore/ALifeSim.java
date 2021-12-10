@@ -6,8 +6,20 @@ import java.util.Hashtable;
 import java.util.Map;
 
 public class ALifeSim {
-
-	
+	/*
+	 * Name(s) of all authors Assignment Liam Walsh
+	 *  name Assignment due date Written/online Project 4
+	 * sources used: (enter "none" if no sources other than the textbook and course
+	 * Online refrence on map 
+	 * https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html
+	 * website used) Help obtained: (enter "none" if no help was given outside of
+	 * the class period. But if you consult an evening tutor, another student, or
+	 * the course mentor during mentor sessions, add their names here) 
+	 * None 
+	 * Add the
+	 * statement:
+	 * "I/we confirm that the above list of sources is complete AND that I/we have not talked to anyone else (e.g., CSC 207 students) about the solution to this problem."
+	 */
 	/**
 	 * @param args <#/iterations> <#/cooperators> <#/defectors> <#/partial cooperators> 
 	 */
@@ -32,7 +44,7 @@ public class ALifeSim {
 		Population testPopulation = new Population(inputTable);
 
 		// implemmenting population
-		for(int i= 0; i<100;i++) {
+		for(int i= 0; i<iterations;i++) {
 			testPopulation.update();
 			
 		}
