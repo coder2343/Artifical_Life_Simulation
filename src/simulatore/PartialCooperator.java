@@ -10,8 +10,6 @@ import java.util.Random;
 public class PartialCooperator extends Organism {
 	Random cooperatorGenerator;
 
-
-
 	public PartialCooperator() {
 		cooperatorGenerator = new Random();
 	}

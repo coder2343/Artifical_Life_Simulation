@@ -2,7 +2,7 @@ package simulatore;
 
 /**
  * @author walsl
- *
+ * base class which all organism types are derived from
  */
 public abstract class Organism {
 	private int organisimEnergy;

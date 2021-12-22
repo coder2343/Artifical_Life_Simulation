@@ -6,9 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+//TODO cleanup the class and add comemnts to clean up the update method
+
+//TODO handle edge case when replacement index ==i
 /**
  * @author walsl
- *
+ * class runs through creating a population of bacteria and managing the whole life simulation
  */
 public class Population {
 	//private HashMap<String, Integer> populationMap;
@@ -29,23 +32,16 @@ public class Population {
 	public Population(HashMap<String, Integer> counts) {
 		//populationMap = counts;
 		lifeForms = new ArrayList<>();
-		//HashMap<String, Integer> entry;
 		for(Map.Entry<String,Integer> entry : counts.entrySet()) {
 			if( entry.getKey().equals("Cooperators")){
-				//System.out.println()
 				numberCooperator = entry.getValue();
-
 			}
 			else if( entry.getKey().equals("Defectors")){
 				numberDefector = entry.getValue();
-
 			}
 			else if( entry.getKey().equals("partialCooperators")){
 				numberPartialCooperator = entry.getValue();
-
 			}
-
-
 		}
 		for(int i =0; i<numberCooperator; i++  ) {
 			lifeForms.add(new Cooperator());
@@ -58,6 +54,10 @@ public class Population {
 		}
 	}
 
+	
+	//TODO idea. method for generating unique replacement index.
+	// any other ideas ....
+	
 	/**
 	 * oops through all the organisms in the population and (
 	 * 1) updates them (by calling their update method), 
@@ -76,12 +76,13 @@ public class Population {
 		for(int i =0; i<lifeForms.size(); i++) {
 			randomIndexList.add(i);
 		}
+		//Shuffle list to be random order
 		Collections.shuffle(randomIndexList);
 		int replaceIndex= replace.nextInt(lifeForms.size());
 
 		// iterate through whole population
 		for(int i = 0; i <lifeForms.size(); i++) {
-
+	
 			lifeForms.get(i).update();
 
 			// check cooperation and add / decrease endergy points 
@@ -91,14 +92,15 @@ public class Population {
 				donationNumber = lifeForms.size() -1;
 			}
 			if(lifeForms.get(i).cooperates()) {
+				// minus energy by 1
 				lifeForms.get(i).decmentEnergy();
-
+				// iterate through and add new index for lifeform to increment energy
 				for(int b =0; b<donationNumber; b++) {
 					Integer CooperationIndex = randomIndexList.get(b);
-					// check if cooperator is donating to itself
+					// check if cooperator is donating to itself and correct the sitatuioon
 					if(lifeForms.get(i)== lifeForms.get(CooperationIndex)) {
 						CooperationIndex = randomIndexList.get(b +1);
-						// adjust b to skip next index and intead go for one more round
+						// adjust b to skip next index and intended go for one more round
 						// set b 
 						b=b+2;
 						b++;
@@ -107,23 +109,19 @@ public class Population {
 					}
 
 					lifeForms.get(CooperationIndex).incrementEnergy();
-
 				}
 			}
+			// deal with ensuring replace index does not equal coopeerate index 
+			while(replaceIndex == i) {
+				replace.nextInt(lifeForms.size());
+			}
 
-
-
-			// check for organism reporduction is avalible 
-			// fix upddate for c
-			//TODO FIX AND ADD NEW ORGANSIM OF SAME TYPE ONLY
-
-			if( (lifeForms.get(i).getEnergy())>=10) {
+			if((lifeForms.get(i).getEnergy())>=10) {
 				if(lifeForms.get(i).GetType().equals("Cooperator")) {
 					lifeForms.set(replaceIndex, new Cooperator());
 				}
 				else if(lifeForms.get(i).GetType().equals("Defector")){
-
-					lifeForms.set(i, new Defector());
+					lifeForms.set(replaceIndex, new Defector());
 
 				}
 				else if(lifeForms.get(i).GetType().equals("PartialCooperator")){
@@ -204,7 +202,7 @@ public class Population {
 	}
 
 	/**
-	 * @return the counts of all the organisms in the population.
+	 * @return the counts of all the organisms in the population. in a map for conveince and access
 	 */
 	public Map<String, Integer> getPopulationCounts(){
 		int cooperatorNumber =0;
@@ -222,9 +220,8 @@ public class Population {
 				partialCooperatorNumber +=1;
 
 			}
-
-
 		}
+
 		resultMap.put("Cooperator", cooperatorNumber);
 		resultMap.put("Defector", defectorNumber);
 		resultMap.put("PartialCooperator", partialCooperatorNumber);
