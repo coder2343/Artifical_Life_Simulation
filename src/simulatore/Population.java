@@ -6,17 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-//TODO cleanup the class and add comemnts to clean up the update method
 
-//TODO handle edge case when replacement index ==i
 /**
  * @author walsl
  * class runs through creating a population of bacteria and managing the whole life simulation
  */
 public class Population {
-	//private HashMap<String, Integer> populationMap;
-
-	// create types of organisms as private feilds
+	// create types of organisms as private fields
 	private ArrayList<Organism> lifeForms ;
 	private Integer numberCooperator;
 	private Integer numberDefector;
@@ -43,13 +39,13 @@ public class Population {
 				numberPartialCooperator = entry.getValue();
 			}
 		}
-		for(int i =0; i<numberCooperator; i++  ) {
+		for(int i =0; i<numberCooperator; i++) {
 			lifeForms.add(new Cooperator());
 		}
-		for(int i =0; i<numberDefector; i++  ) {
+		for(int i =0; i<numberDefector; i++) {
 			lifeForms.add(new Defector());
 		}
-		for(int i =0; i<numberPartialCooperator; i++  ) {
+		for(int i =0; i<numberPartialCooperator; i++) {
 			lifeForms.add(new PartialCooperator());
 		}
 	}
@@ -77,7 +73,7 @@ public class Population {
 		Random replace = new Random();
 		int replaceIndex= replace.nextInt(populationSize);
 		while(organismIndex == replaceIndex) {
-			replaceIndex =  replace.nextInt(populationSize);
+			replaceIndex = replace.nextInt(populationSize);
 		}
 		if(organismIndex !=replaceIndex ) {
 			return replaceIndex;
@@ -101,15 +97,15 @@ public class Population {
 	public void update() {
 		ArrayList<Integer> randomIndexList = generateListRandomNumbers(lifeForms.size());
 		// iterate through whole population
-		for(int i = 0; i <lifeForms.size(); i++) {
+		for(int i = 0; i <lifeForms.size();i++) {
 			lifeForms.get(i).update();
 			int replaceIndex = generateUniqueReplacementIndex(i, lifeForms.size());
 
-			// check cooperation and add / decrease endergy points 
+			// check cooperation and add / decrease energy points 
 			// set correct donation number 
 			int donationNumber =8;
 			if(lifeForms.size() <8) {
-				donationNumber = lifeForms.size() -1;
+				donationNumber = lifeForms.size() - 1;
 			}
 			if(lifeForms.get(i).cooperates()) {
 				// minus energy by 1
@@ -130,8 +126,7 @@ public class Population {
 					lifeForms.get(CooperationIndex).incrementEnergy();
 				}
 			}
-		
-
+	
 			if((lifeForms.get(i).getEnergy())>=10) {
 				if(lifeForms.get(i).GetType().equals("Cooperator")) {
 					lifeForms.set(replaceIndex, new Cooperator());
@@ -155,11 +150,11 @@ public class Population {
 	public double calcuateCooperationMean() {
 		double cooperationProbability =0; 
 		double sumProabilites = 0;
-		for (int i =0 ; i <lifeForms.size(); i++){
+		for (int i = 0 ;i <lifeForms.size(); i++){
 			sumProabilites +=lifeForms.get(i).getCooperationProbability();
 
 		}
-		cooperationProbability = sumProabilites/ lifeForms.size();
+		cooperationProbability = sumProabilites / lifeForms.size();
 		return cooperationProbability;		
 	}
 
@@ -169,15 +164,14 @@ public class Population {
 	 * the cooperation probabilities of all the organisms in the population.
 	 */
 	public double getMeanCooperatorCooperation() {
-		double cooperationProbability =0; 
+		double cooperationProbability = 0; 
 		double sumProabilites = 0;
 		for (int i =0 ; i <lifeForms.size(); i++){
 			if(lifeForms.get(i).GetType().equals("Cooperator")) {
-				sumProabilites +=lifeForms.get(i).getCooperationProbability();
+				sumProabilites += lifeForms.get(i).getCooperationProbability();
 			}
-
 		}
-		cooperationProbability = sumProabilites/ lifeForms.size();
+		cooperationProbability = sumProabilites / lifeForms.size();
 		return cooperationProbability;		
 	}
 
@@ -189,13 +183,13 @@ public class Population {
 	public double getMeanPartialCooperatorCooperation() {
 		double cooperationProbability =0; 
 		double sumProabilites = 0;
-		for (int i =0 ; i <lifeForms.size(); i++){
+		for (int i = 0; i<lifeForms.size(); i++){
 			if(lifeForms.get(i).GetType().equals("PartialCooperator")) {
-				sumProabilites +=lifeForms.get(i).getCooperationProbability();
+				sumProabilites += lifeForms.get(i).getCooperationProbability();
 			}
 
 		}
-		cooperationProbability = sumProabilites/ lifeForms.size();
+		cooperationProbability = sumProabilites / lifeForms.size();
 		return cooperationProbability;		
 	}
 	/**
@@ -206,18 +200,18 @@ public class Population {
 	public double getMeanDefectorCooperation() {
 		double cooperationProbability =0; 
 		double sumProabilites = 0;
-		for (int i =0 ; i <lifeForms.size(); i++){
+		for (int i =0 ; i<lifeForms.size(); i++){
 			if(lifeForms.get(i).GetType().equals("Defector")) {
 
-				sumProabilites +=lifeForms.get(i).getCooperationProbability();
+				sumProabilites += lifeForms.get(i).getCooperationProbability();
 			}
 		}
-		cooperationProbability = sumProabilites/ lifeForms.size();
+		cooperationProbability = sumProabilites / lifeForms.size();
 		return cooperationProbability;		
 	}
 
 	/**
-	 * @return the counts of all the organisms in the population. in a map for conveince and access
+	 * @return the counts of all the organisms in the population in a map for conveince and access
 	 */
 	public Map<String, Integer> getPopulationCounts(){
 		int cooperatorNumber =0;
