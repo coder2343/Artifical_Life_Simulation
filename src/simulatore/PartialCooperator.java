@@ -14,9 +14,6 @@ public class PartialCooperator extends Organism {
 		cooperatorGenerator = new Random();
 	}
 
-	/**
-	 *
-	 */
 	@Override
 	public String GetType() {
 		// TODO Auto-generated method stub

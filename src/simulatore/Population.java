@@ -54,9 +54,40 @@ public class Population {
 		}
 	}
 
+	/**
+	 * @param lifeFormsSize
+	 * @return arrayList of indexes in random order.
+	 */
+	public static ArrayList<Integer> generateListRandomNumbers(int lifeFormsSize) {
+		ArrayList<Integer> randomIndexList = new ArrayList<>();
+		for(int i =0; i<lifeFormsSize; i++) {
+			randomIndexList.add(i);
+		}
+		//Shuffle list to be random order
+		Collections.shuffle(randomIndexList);
+		return randomIndexList;
+	}
 	
-	//TODO idea. method for generating unique replacement index.
-	// any other ideas ....
+	/**
+	 * @param organismIndex
+	 * @param populationSize
+	 * @return random index for replacement if organsim i reporduces.
+	 */
+	public static int generateUniqueReplacementIndex(int organismIndex, int populationSize) {
+		Random replace = new Random();
+		int replaceIndex= replace.nextInt(populationSize);
+		while(organismIndex == replaceIndex) {
+			replaceIndex =  replace.nextInt(populationSize);
+		}
+		if(organismIndex !=replaceIndex ) {
+			return replaceIndex;
+		}
+		else {
+			return -1;
+		}
+	}
+	
+	
 	
 	/**
 	 * oops through all the organisms in the population and (
@@ -65,25 +96,14 @@ public class Population {
 	 * (3) checks to see if they reproduce. We check to see if an organism reproduces 
 	 * by first checking its energy level. 
 	 * If the organism has at least 10 energy units, 
-	 *then it reproduces a
-	 *and that new organism replaces a random organism in the population.
-	 *    --- QUESTION FOR BARB 
-	 *    		DOES THAT mean any organism will be replaced or organism of some other type
+	 *then it reproduces a and that new organism replaces a random organism in the population.
 	 */
 	public void update() {
-		Random replace = new Random();
-		ArrayList<Integer> randomIndexList = new ArrayList<>();
-		for(int i =0; i<lifeForms.size(); i++) {
-			randomIndexList.add(i);
-		}
-		//Shuffle list to be random order
-		Collections.shuffle(randomIndexList);
-		int replaceIndex= replace.nextInt(lifeForms.size());
-
+		ArrayList<Integer> randomIndexList = generateListRandomNumbers(lifeForms.size());
 		// iterate through whole population
 		for(int i = 0; i <lifeForms.size(); i++) {
-	
 			lifeForms.get(i).update();
+			int replaceIndex = generateUniqueReplacementIndex(i, lifeForms.size());
 
 			// check cooperation and add / decrease endergy points 
 			// set correct donation number 
@@ -107,14 +127,10 @@ public class Population {
 						lifeForms.get(CooperationIndex).incrementEnergy();
 						continue;
 					}
-
 					lifeForms.get(CooperationIndex).incrementEnergy();
 				}
 			}
-			// deal with ensuring replace index does not equal coopeerate index 
-			while(replaceIndex == i) {
-				replace.nextInt(lifeForms.size());
-			}
+		
 
 			if((lifeForms.get(i).getEnergy())>=10) {
 				if(lifeForms.get(i).GetType().equals("Cooperator")) {
@@ -122,7 +138,6 @@ public class Population {
 				}
 				else if(lifeForms.get(i).GetType().equals("Defector")){
 					lifeForms.set(replaceIndex, new Defector());
-
 				}
 				else if(lifeForms.get(i).GetType().equals("PartialCooperator")){
 					lifeForms.set(replaceIndex, new PartialCooperator());
@@ -218,7 +233,6 @@ public class Population {
 			}
 			else if(lifeForms.get(i).GetType().equals("PartialCooperator")){
 				partialCooperatorNumber +=1;
-
 			}
 		}
 
