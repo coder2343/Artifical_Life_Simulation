@@ -17,7 +17,6 @@ public abstract class Organism {
 		incrementEnergy();
 	}
 
-
 	/**
 	 * @return the current energy of this organism.
 	 */ 

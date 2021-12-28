@@ -16,13 +16,11 @@ public class PartialCooperator extends Organism {
 
 	@Override
 	public String GetType() {
-		// TODO Auto-generated method stub
 		return "PartialCooperator";
 	}
 
 	@Override
 	public Organism reproduce() {
-		// TODO Auto-generated method stub
 
 		return new PartialCooperator() ;
 	}

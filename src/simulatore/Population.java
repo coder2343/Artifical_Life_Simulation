@@ -22,8 +22,8 @@ public class Population {
 	 * @param counts
 	 * Constructs a population of organisms dictated by the given set of pairs 
 	 * that associate (case-sensitive) names of organisms to counts of that type of organism.
-	 *  Organisms not mentioned in the mapping do not appear in the population. 
-	 *  Throws an IllegalArgumentException if the mapping mentions organism types that do not exist in the program.
+	 * Organisms not mentioned in the mapping do not appear in the population. 
+	 * Throws an IllegalArgumentException if the mapping mentions organism types that do not exist in the program.
 	 */
 	public Population(HashMap<String, Integer> counts) {
 		//populationMap = counts;
@@ -32,10 +32,10 @@ public class Population {
 			if( entry.getKey().equals("Cooperators")){
 				numberCooperator = entry.getValue();
 			}
-			else if( entry.getKey().equals("Defectors")){
+			else if(entry.getKey().equals("Defectors")){
 				numberDefector = entry.getValue();
 			}
-			else if( entry.getKey().equals("partialCooperators")){
+			else if(entry.getKey().equals("partialCooperators")){
 				numberPartialCooperator = entry.getValue();
 			}
 		}
@@ -97,14 +97,14 @@ public class Population {
 	public void update() {
 		ArrayList<Integer> randomIndexList = generateListRandomNumbers(lifeForms.size());
 		// iterate through whole population
-		for(int i = 0; i <lifeForms.size();i++) {
+		for(int i= 0; i <lifeForms.size();i++) {
 			lifeForms.get(i).update();
 			int replaceIndex = generateUniqueReplacementIndex(i, lifeForms.size());
 
 			// check cooperation and add / decrease energy points 
 			// set correct donation number 
-			int donationNumber =8;
-			if(lifeForms.size() <8) {
+			int donationNumber = 8;
+			if(lifeForms.size()<8) {
 				donationNumber = lifeForms.size() - 1;
 			}
 			if(lifeForms.get(i).cooperates()) {
@@ -187,7 +187,6 @@ public class Population {
 			if(lifeForms.get(i).GetType().equals("PartialCooperator")) {
 				sumProabilites += lifeForms.get(i).getCooperationProbability();
 			}
-
 		}
 		cooperationProbability = sumProabilites / lifeForms.size();
 		return cooperationProbability;		
@@ -202,7 +201,6 @@ public class Population {
 		double sumProabilites = 0;
 		for (int i =0 ; i<lifeForms.size(); i++){
 			if(lifeForms.get(i).GetType().equals("Defector")) {
-
 				sumProabilites += lifeForms.get(i).getCooperationProbability();
 			}
 		}
@@ -220,7 +218,7 @@ public class Population {
 		HashMap <String, Integer>resultMap  = new HashMap<>();
 		for(int i =0; i< lifeForms.size(); i++) {
 			if(lifeForms.get(i).GetType().equals("Cooperator")){
-				cooperatorNumber += 1;
+				cooperatorNumber +=1;
 			}
 			else if( lifeForms.get(i).GetType().equals("Defector")){
 				defectorNumber +=1 ;
